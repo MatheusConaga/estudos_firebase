@@ -7,14 +7,11 @@ void main() async{
   await Firebase.initializeApp();
 
   FirebaseFirestore db = FirebaseFirestore.instance;
-  
+
+  var pesquisa = "m";
   QuerySnapshot querySnapshot = await db.collection("usuarios")
-  // .where("idade", isEqualTo: "21")
-  // .where("idade", isGreaterThan: 20)
-  // .where("idade", isLessThan: 40)
-  .orderBy("idade", descending: true)
-  .orderBy("nome", descending: false)
-  .limit(3)
+  .where("nome", isGreaterThanOrEqualTo: pesquisa)
+  .where("nome", isLessThanOrEqualTo: pesquisa + "\uf8ff")
   .get();
 
   for( DocumentSnapshot item in querySnapshot.docs){
@@ -23,6 +20,8 @@ void main() async{
     print("filtro nome: ${dados["nome"]} - idade: ${dados["idade"]}");
 
   }
+
+
 
 
 

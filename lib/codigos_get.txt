@@ -34,3 +34,35 @@ DocumentSnapshot snapshot = await db.collection("usuarios").doc("002").get();
           }
         }
     );
+
+
+    PESQUISAS COM FILTROS
+    // .where("idade", isEqualTo: "21")
+      // .where("idade", isGreaterThan: 20)
+      // .where("idade", isLessThan: 40)
+      .orderBy("idade", descending: true)
+      .orderBy("nome", descending: false)
+      .limit(3)
+      .get();
+
+      for( DocumentSnapshot item in querySnapshot.docs){
+
+        var dados = item;
+        print("filtro nome: ${dados["nome"]} - idade: ${dados["idade"]}");
+
+      }
+
+   PESQUISAS COM VALORES ENTRE AS PALAVRAS
+
+    var pesquisa = "m";
+     QuerySnapshot querySnapshot = await db.collection("usuarios")
+     .where("nome", isGreaterThanOrEqualTo: pesquisa)
+     .where("nome", isLessThanOrEqualTo: pesquisa + "\uf8ff")
+     .get();
+
+     for( DocumentSnapshot item in querySnapshot.docs){
+
+       var dados = item;
+       print("filtro nome: ${dados["nome"]} - idade: ${dados["idade"]}");
+
+     }
