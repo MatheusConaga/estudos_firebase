@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "975793643814",
+    "project_id": "estudos-36634",
+    "storage_bucket": "estudos-36634.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975793643814:android:69e98da9e94f811cac61e7",
+        "android_client_info": {
+          "package_name": "com.example.estudos_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwFDcsCHAM33X224xw5ufusHcO3fq9tlY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
