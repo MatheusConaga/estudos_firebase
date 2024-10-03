@@ -1,0 +1,36 @@
+DELETAR DADOS
+
+db.collection("usuarios").doc("003").delete();
+
+
+PUXAR DADOS
+
+DocumentSnapshot snapshot = await db.collection("usuarios").doc("002").get();
+
+    //ASSIM
+  var dados = snapshot;
+  print("Dados nome: " + dados["nome"] + " idade: " + dados["idade"]);
+
+  //OU ASSIM
+  print("Dados recuperados: " + snapshot.data().toString() );
+
+
+    PERCORRE OS DADOS DE TODA LISTA (NÃO USUAL QUANDO TEM NOVAS ATUALIZAÇÕES NO BD)
+  /*
+    for( DocumentSnapshot item in snapshot.docs ){
+      var dados = item;
+      print("Dados usuarios: " + dados["nome"]+ " - "+dados["idade"]);
+    }
+  */
+
+  ESSA TEM REQUISIÇÕES RECORRENTES SOBRE AS NOVAS ATUALIZAÇÕES DO BD
+  db.collection("usuarios")
+        .snapshots()
+        .listen(
+        ( snapshot ){
+          for( DocumentSnapshot item in snapshot.docs ){
+            var dados = item;
+            print("Dados usuarios: " + dados["nome"]+ " - "+dados["idade"]);
+          }
+        }
+    );

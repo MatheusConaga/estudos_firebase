@@ -1,0 +1,38 @@
+ FirebaseFirestore db = FirebaseFirestore.instance;
+
+ADICIONANDO VALORES COM TODAS AS REFERENCIAS
+
+  /*
+  db.collection("usuarios")
+  .doc("002")
+  .set({
+    "nome":"Mariane Soares",
+    "idade": "22"
+  });
+*/
+
+
+ADICIONANDO VALORES DINAMICOS (ID AUTOMATICO)
+
+  /*
+  DocumentReference ref = await db.collection("noticias")
+  .add(
+      {
+        "titulo":"Nordeste quente do djabo",
+        "descricao": "texto exemplo"
+      }
+  );
+
+  print("Item salvo: " + ref.id);
+*/
+
+EDITANDO VALORES COM BASE NO ID
+
+  db.collection("noticias")
+  .doc("3mPFzKNtk5zypIBMRswX")
+  .set(
+      {
+        "titulo":"Fogaça é fogo",
+        "descricao": "texto exemplo"
+      }
+  );
