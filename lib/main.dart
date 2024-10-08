@@ -1,29 +1,33 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 void main() async{
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  FirebaseFirestore db = FirebaseFirestore.instance;
+  FirebaseAuth auth = FirebaseAuth.instance;
+  String email = "matheus@gmail.com";
+  String password = "12345678";
 
-  var pesquisa = "m";
-  QuerySnapshot querySnapshot = await db.collection("usuarios")
-  .where("nome", isGreaterThanOrEqualTo: pesquisa)
-  .where("nome", isLessThanOrEqualTo: pesquisa + "\uf8ff")
-  .get();
+  /*
+  auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password
+  ).then(( UserCredential userCrential ){
+      print("sucesso ao criar novo usuário!!! e-mail: " + (userCrential.user!.email ?? "Sem email"));
+  }).catchError((erro){
+    print("Novo usuário: erro " + erro.toString());
+  });*/
 
-  for( DocumentSnapshot item in querySnapshot.docs){
-
-    var dados = item;
-    print("filtro nome: ${dados["nome"]} - idade: ${dados["idade"]}");
-
+  User? usuarioAtual = auth.currentUser;
+  if(usuarioAtual !=null ){
+  print("Usuario logado email: " + (usuarioAtual.email ?? "Sem email"));
+ } else{
+    print("Usuario NÃO CREDENCIADO");
   }
-
-
-
-
 
   runApp(MaterialApp(
     home: MyApp(),

@@ -1,0 +1,25 @@
+
+INSTANCIA DE AUTENTICAÇÃO DO FIREBASE
+FirebaseAuth auth = FirebaseAuth.instance;
+  String email = "matheus@gmail.com";
+  String password = "12345678";
+
+
+CRIAÇÃO DE NOVO USUARIO COM VERIFICAÇÃO
+auth.createUserWithEmailAndPassword(
+      email: email,
+      password: password
+  ).then(( UserCredential userCrential ){
+      print("sucesso ao criar novo usuário!!! e-mail: " + (userCrential.user!.email ?? "Sem email"));
+  }).catchError((erro){
+    print("Novo usuário: erro " + erro.toString());
+  });
+
+
+  VERIFICAÇÃO SE O USUARIO ESTA LOGADO
+   User? usuarioAtual = auth.currentUser;
+    if(usuarioAtual !=null ){
+    print("Usuario logado email: " + (usuarioAtual.email ?? "Sem email"));
+   } else{
+      print("Usuario NÃO CREDENCIADO");
+   }
