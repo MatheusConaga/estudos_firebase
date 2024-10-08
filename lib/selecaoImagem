@@ -1,0 +1,58 @@
+XFile? _imagem;
+  XFile? imagemSelecionada;
+  Future _recuperarImagem(bool daCamera) async{
+      if ( daCamera ){
+        imagemSelecionada = await ImagePicker().pickImage(source: ImageSource.camera);
+      } else{
+        imagemSelecionada = await ImagePicker().pickImage(source: ImageSource.gallery);
+      }
+
+      setState(() {
+        _imagem = imagemSelecionada;
+      });
+
+}
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(
+          "Selecionando imagens", style: TextStyle(color: Colors.white),),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ElevatedButton(
+            child: Text("Camera"),
+            onPressed: () {
+                _recuperarImagem(true);
+            },
+            ),
+            ElevatedButton(
+              child: Text("Galeria"),
+              onPressed: () {
+                _recuperarImagem(false);
+              },
+            ),
+            _imagem == null
+            ? Container()
+                : Image.file(File(_imagem!.path))
+          ],
+        ),
+      ),
+    );
+
+    UPLOAD DE IMAGEM PARA O FIREBASE
+
+     Future _uploadImagem() async{
+          // Referenciar arquivo
+          FirebaseStorage storage = FirebaseStorage.instance;
+          Reference pastaRaiz = storage.ref();
+          Reference arquivo = pastaRaiz.child("fotos").child("foto1.jpg");
+          File file = File(_imagem!.path);
+          // Fazer upload de imagem
+          arquivo.putFile(file);
+
+      }

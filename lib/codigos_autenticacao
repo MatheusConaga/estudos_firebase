@@ -23,3 +23,16 @@ auth.createUserWithEmailAndPassword(
    } else{
       print("Usuario NÃO CREDENCIADO");
    }
+
+   DESLOGAR USUARIO
+   auth.signOut();
+
+   LOGAR USUARIO
+   auth.signInWithEmailAndPassword(
+         email: email,
+         password: password
+     ).then((UserCredential userCredential){
+       print("sucesso ao Logar!!! e-mail: " + (userCredential.user!.email ?? "Sem email"));
+     }).catchError((erro){
+       print("Usuário: erro " + erro.toString());
+     });
